@@ -26,6 +26,9 @@ class PushListParser:
             self.jenkins = JenkinsAPI()
 
     def get_diff_url(self, previous_hash):
+        if previous_hash == 'N/A':
+            return 'N/A'
+
         return f"{self.repo.url}compare/{previous_hash}...{self.version}"
 
 
@@ -56,7 +59,7 @@ class PushListParser:
 Task    : Deploy {self.repo.name} {self.version} to PROD
 TW Task : {self.tw_task}
 Release : {self.release_notes_url}
-Diff    : {self.get_diff_url(task.last_build_prod.hash)}
+Diff    : {self.get_diff_url(task.prod_hash)}
 ENV     : {env_name}
 QA Hash : {task.qa_hash}
 Deploy  : {self.repo.get_tag_hash(self.version)}

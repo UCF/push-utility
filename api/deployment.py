@@ -41,8 +41,17 @@ class DeploymentTask:
             else 'N/A'
 
     @property
+    def prod_hash(self):
+        return self.last_build_prod.hash \
+            if self.last_build_prod is not None \
+                else 'N/A'
+
+    @property
     def prod_details(self):
         retval = ''
+        if self.last_build_prod is None:
+            return 'N/A'
+
         if self.last_build_prod is not None:
             retval += self.last_build_prod.hash
 
