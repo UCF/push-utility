@@ -50,6 +50,19 @@ positional arguments:
   previous_version  The previous version that was pushed.
   tw_task           The teamwork job for the push
 
+```
+
 2. Wizardly
 
-Alternatively, you can also provide only the repository name and use a simple wizard to choose which tag you're deploying.
+Alternatively, you can also provide only the repository name and use a simple wizard to choose the other options:
+
+```
+> python app.py Athena-Framework
+
+? Which tag do you want to deploy: (Use arrow keys)
+> v1.1.0
+  v1.0.8
+  v1.0.7
+  ...
+
+```
