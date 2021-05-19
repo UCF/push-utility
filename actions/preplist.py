@@ -4,6 +4,7 @@ import io
 from PyInquirer import prompt
 from settings import Settings
 
+from halo import Halo
 class PushListParser:
     def __init__(self, args):
         self.repo = args.repo
@@ -33,6 +34,8 @@ class PushListParser:
 
 
     def execute(self):
+        spinner = Halo(text='Gathering jobs...', spinner='dots', color='blue')
+        spinner.start()
         self.configure()
 
         jobs = self.jenkins.get_jobs(self.repo.name)
@@ -68,6 +71,8 @@ JOB URL : {task.prod_job['url']}
 
 
                 """
+
+        spinner.stop()
 
         print(retval)
 
