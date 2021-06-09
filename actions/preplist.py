@@ -34,7 +34,7 @@ class PushListParser:
 
 
     def execute(self):
-        spinner = Halo(text='Gathering jobs...', spinner='dots', color='blue')
+        spinner = Halo(text='Gathering jobs...', spinner='dots', color='cyan')
         spinner.start()
         self.configure()
 

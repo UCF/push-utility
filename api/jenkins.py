@@ -1,9 +1,52 @@
-import json
+import json, threading, queue
 from datetime import datetime
 import requests
 from requests.api import request
 from requests.auth import HTTPBasicAuth
 from settings import Settings
+
+safetyLock = threading.Lock()
+
+class JenkinsRequestWorker(threading.Thread):
+    def __init__(self, project_name, auth_credentials, request_queue, retval):
+        super(JenkinsRequestWorker, self).__init__(daemon=True)
+        self.project_name = project_name
+        self.request_queue = request_queue
+        self.auth_credentials = auth_credentials
+        self.retval = retval
+
+    def run(self):
+        while True:
+            env = self.request_queue.get()
+
+            request_url = f"{env['url']}api/json"
+
+            response = requests.get(request_url, auth=self.auth_credentials, verify=False)
+            if response.status_code >= 400:
+                raise Exception("Error retrieving jobs.")
+
+            parsed_response = response.json()
+
+            for job in parsed_response['jobs']:
+                if self.project_name.lower() in job['name'].lower() and 'prod' in job['name'].lower():
+                    safetyLock.acquire()
+                    self.retval[env['name']]['jobs'].append({
+                        'name': job['name'],
+                        'url': job['url'],
+                        'type': 'PROD'
+                    })
+                    safetyLock.release()
+                elif self.project_name.lower() in job['name'].lower() and 'qa' in job['name'].lower():
+                    safetyLock.acquire()
+                    self.retval[env['name']]['jobs'].append({
+                        'name': job['name'],
+                        'url': job['url'],
+                        'type': 'QA'
+                    })
+                    safetyLock.release()
+
+            self.request_queue.task_done()
+
 
 class JenkinsBuild(object):
     def __init__(self, data):
@@ -88,6 +131,7 @@ class JenkinsAPI:
 
         return retval
 
+
     def get_jobs(self, project_name):
         envs = Settings.get_setting('envs')
 
@@ -101,28 +145,15 @@ class JenkinsAPI:
                 'jobs': []
             }
 
+        request_queue = queue.Queue()
+
+        for x in range(5):
+            JenkinsRequestWorker(project_name, self.auth_credentials, request_queue, retval).start()
+
         for env in envs:
-            request_url = f"{env['url']}api/json"
+            request_queue.put(env)
 
-            response = requests.get(request_url, auth=self.auth_credentials, verify=False)
-            if response.status_code >= 400:
-                raise Exception("Error retrieving jobs.")
-
-            parsed_response = response.json()
-
-            for job in parsed_response['jobs']:
-                if project_name.lower() in job['name'].lower() and 'prod' in job['name'].lower():
-                    retval[env['name']]['jobs'].append({
-                        'name': job['name'],
-                        'url': job['url'],
-                        'type': 'PROD'
-                    })
-                elif project_name.lower() in job['name'].lower() and 'qa' in job['name'].lower():
-                    retval[env['name']]['jobs'].append({
-                        'name': job['name'],
-                        'url': job['url'],
-                        'type': 'QA'
-                    })
+        request_queue.join()
 
         return retval
 
