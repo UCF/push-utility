@@ -157,6 +157,19 @@ class JenkinsAPI:
 
         return retval
 
+    def get_all_jobs(self, env):
+        retval = []
+
+        request_url = f"{env['url']}/api/json"
+
+        response = requests.get(request_url, auth=self.auth_credentials, verify=False)
+        if response.status_code >= 400:
+            raise Exception("Error retrieving jobs.")
+
+        parsed_response = response.json()
+
+        return parsed_response['jobs']
+
 
     def get_job_details(self, job_url):
         request_url = f"{job_url}/api/json"
