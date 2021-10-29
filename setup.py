@@ -10,7 +10,7 @@ setup(
         ]
     },
     install_requires=[
-        'PyGithub=1.54.1',
+        'PyGithub==1.54.1',
         'PyInquirer==1.0.3',
         'PyJWT==1.7.1',
         'requests==2.25.1',
