@@ -3,8 +3,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 import argparse
 from PyInquirer import prompt
-import json
-import io
 
 from actions.configure import ConfigureUtility
 from actions.preplist import PushListParser
@@ -16,8 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     'repo',
     type=str,
-    help='The repository to deploy.',
-    nargs="?"
+    help='The repository to deploy.'
 )
 
 parser.add_argument(

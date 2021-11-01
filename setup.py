@@ -10,10 +10,12 @@ setup(
         ]
     },
     install_requires=[
+        'halo==0.0.31',
         'PyGithub==1.54.1',
         'PyInquirer==1.0.3',
         'PyJWT==1.7.1',
         'requests==2.25.1',
+        'tabulate==0.8.9',
         'tqdm==4.60.0',
         'urllib3==1.26.3'
     ]
