@@ -1,12 +1,23 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+
+with open('readme.md', 'r', encoding='utf-8') as fh:
+    long_description = fh.read()
 
 setup(
-    name='ucf-push-utility',
+    name='push-utility-ucf',
     version='1.0.0',
-    python_requires='>3.0.0',
+    author='UCF Web Communications',
+    author_email='webcom@ucf.edu',
+    description='Utility for gathering information on deployments.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    url='https://github.com/UCF/push-utility/',
+    python_requires='>=3.0.0',
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
     entry_points={
         'console_scripts': [
-            'pushutil=app:main'
+            'pushutil=pushutil.app:main'
         ]
     },
     install_requires=[

@@ -2,7 +2,7 @@ from api.jenkins import JenkinsAPI
 from api.deployment import DeploymentTask
 import io
 from PyInquirer import prompt
-from settings import Settings
+from pushutil.settings import Settings
 
 from halo import Halo
 class PushListParser:

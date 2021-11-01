@@ -1,7 +1,7 @@
 import os
 import re
 from github import Github
-from settings import Settings
+from pushutil.settings import Settings
 
 class GHRepo:
     def __init__(self, project):

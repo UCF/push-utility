@@ -1,6 +1,6 @@
 from api.jenkins import JenkinsAPI
 from PyInquirer import prompt
-from settings import Settings
+from pushutil.settings import Settings
 
 from halo import Halo
 from tabulate import tabulate

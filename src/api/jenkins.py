@@ -3,7 +3,7 @@ from datetime import datetime
 import requests
 from requests.api import request
 from requests.auth import HTTPBasicAuth
-from settings import Settings
+from pushutil.settings import Settings
 
 safetyLock = threading.Lock()
 

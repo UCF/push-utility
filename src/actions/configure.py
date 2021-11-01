@@ -1,6 +1,5 @@
 from api.jenkins import JenkinsAPI
-import io
-from settings import Settings
+from pushutil.settings import Settings
 from PyInquirer import prompt
 
 class ConfigureUtility:
