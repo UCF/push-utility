@@ -5,7 +5,7 @@ This is a simple python utility that gathers information about a repository, and
 ## Setup
 1. Install the utility. The utility requires python3, so you may have to install using `pip3`: `pip3 install git+https://github.com/UCF/push-utility.git`.
 2. Follow the [configuration instructions](#configuration).
-3.
+3. Review the [usage section](#usage) for instructions on how to use the utility.
 
 ## Setup for Contributing
 1. Create a python3 venv where the project will reside: `python3 -m venv push-utility`
