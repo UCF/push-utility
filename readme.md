@@ -3,6 +3,10 @@
 This is a simple python utility that gathers information about a repository, and recent push information about that repository into a compact message that we use to verify what we're pushing and what the state of production is prior to pushing.
 
 ## Setup
+1. Install the utility. The utility requires python3, so you may have to install using `pip3`: `pip3 install git+https://github.com/UCF/push-utility.git`.
+2.
+
+## Setup for Contributing
 1. Create a python3 venv where the project will reside: `python3 -m venv push-utility`
 2. Clone this repository into a `src` directory of that venv: `cd push-utility && git clone https://github.com/UCF/push-utility/.git src`.
 3. Activate the virtual environment: `source ../bin/activate`.

@@ -14,7 +14,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     'repo',
     type=str,
-    help='The repository to deploy.'
+    help='The repository to deploy.',
+    nargs="?"
 )
 
 parser.add_argument(
