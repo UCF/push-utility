@@ -28,7 +28,7 @@ Once these tokens have been created an securely stored, you can run the configur
 
 **If running local copy of project**
 
-`python app.py --configure`
+`python src/pushutil/app.py --configure`
 
 The first series of questions will prompt you for the following:
 
