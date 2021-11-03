@@ -4,7 +4,8 @@ This is a simple python utility that gathers information about a repository, and
 
 ## Setup
 1. Install the utility. The utility requires python3, so you may have to install using `pip3`: `pip3 install git+https://github.com/UCF/push-utility.git`.
-2.
+2. Follow the [configuration instructions](#configuration).
+3.
 
 ## Setup for Contributing
 1. Create a python3 venv where the project will reside: `python3 -m venv push-utility`
@@ -20,6 +21,12 @@ This utility requires you to have access to Jenkins and GitHub via their APIs. I
 [GitHub API Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 
 Once these tokens have been created an securely stored, you can run the configuration process of the utility:
+
+**If installed via pip globally**
+
+`pushutil --configure`
+
+**If running local copy of project**
 
 `python app.py --configure`
 
@@ -46,7 +53,8 @@ There are two basic ways to run the utility:
 You are able to specify all the input data yourself within the command line arguments when you run the utility. The options are as follows:
 
 ```
-usage: app.py [-h] [--configure] [repo] [version] [previous_version] [tw_task]
+usage: pushutil [-h] [--configure]
+                [repo] [version] [previous_version] [tw_task]
 
 positional arguments:
   repo              The repository to deploy.
@@ -61,7 +69,7 @@ positional arguments:
 Alternatively, you can also provide only the repository name and use a simple wizard to choose the other options:
 
 ```
-> python app.py Athena-Framework
+> pushutil Athena-Framework
 
 ? Which tag do you want to deploy: (Use arrow keys)
 > v1.1.0
