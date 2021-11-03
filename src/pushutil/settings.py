@@ -1,11 +1,17 @@
+import os
 import json
-import io
+from pathlib import Path
 
 class Settings:
     settings_dict = None
 
+    def get_file_path() -> str:
+        homedir = Path.home()
+        return os.path.join(homedir, '.ucfpushutil.json')
+
     def read_file():
-        with open('settings.json', 'r') as settings_file:
+        homedir = Path.home()
+        with open(Settings.get_file_path(), 'r') as settings_file:
             Settings.settings_dict = json.load(settings_file)
 
     @classmethod
@@ -22,5 +28,5 @@ class Settings:
             return None
 
     def write_settings(setting_args):
-        with open('settings.json', 'w') as setting_file:
+        with open(Settings.get_file_path(), 'w') as setting_file:
             json.dump(setting_args, setting_file)
