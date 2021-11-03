@@ -45,6 +45,10 @@ Once you have chosen your Jenkins directories, you will be prompted for the foll
 
 Note, the username provided also determines where the utility will look for repositories when pulling information. If using this within an organizational setting, be sure to use the name of your Org here, and not your username.
 
+# Migration Instructions
+
+If you were using the utility prior to v1.0.0, and do not want to have to manually reconfigure, you can copy the `settings.json` in the project root to `~/.ucfpushutil.json`, which is the new location for the settings file.
+
 ## Usage
 There are two basic ways to run the utility:
 
